@@ -1,0 +1,111 @@
+<!doctype html>
+<html lang="ja">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <meta name="theme-color" content="#101816" />
+    <meta name="robots" content="noindex, nofollow" />
+    <meta name="description" content="REALIZE STADIUM 野球スタジアム抽選ショー" />
+    <title>REALIZE STADIUM | THE GRAND DRAW</title>
+    <link rel="icon" href="/realize-stadium-lottery-v02/media/favicon.svg" type="image/svg+xml" />
+    <script type="module" crossorigin src="/realize-stadium-lottery-v02/assets/index-Di0Ci7Wm.js"></script>
+    <link rel="stylesheet" crossorigin href="/realize-stadium-lottery-v02/assets/index-DWCeSemP.css">
+  </head>
+  <body>
+    <div id="app" class="app">
+      <main id="arena" class="arena" aria-label="REALIZE 3Dスタジアム">
+        <canvas id="stadiumCanvas" aria-label="立体スタジアム"></canvas>
+        <div class="scene-shade"></div>
+        <div id="loading" class="loading"><span class="loading-diamond"></span><strong>球場を開場しています</strong></div>
+        <div id="fallback" class="fallback" hidden><img src="/realize-stadium-lottery-v02/media/champions.png" alt="球場で優勝を祝う選手たち" /></div>
+        <header class="header">
+          <div class="brand"><span class="brand-r">R</span><div><span class="eyebrow">REALIZE ENTERTAINMENT</span><h1>REALIZE <span>STADIUM</span></h1></div></div>
+          <div class="header-right">
+            <span id="liveBadge" class="live-badge"><i></i><span>開場中</span></span>
+            <button id="soundBtn" class="icon-button" aria-label="音声をオンにする" title="音声をオンにする"><i data-lucide="volume-x" class="sound-off"></i><i data-lucide="volume-2" class="sound-on"></i></button>
+            <button id="fullBtn" class="icon-button" aria-label="全画面表示" title="全画面表示"><i data-lucide="maximize"></i></button>
+            <button id="panelBtn" class="icon-button" aria-label="操作卓を開閉" title="操作卓を開閉" aria-expanded="true" aria-controls="operator"><i data-lucide="sliders-horizontal"></i></button>
+          </div>
+        </header>
+        <div class="match-meta"><span><i class="tiny-square"></i> THE GRAND DRAW</span><span id="edition">NIGHT GAME / 01</span></div>
+        <div id="cameraTools" class="camera-tools" role="group" aria-label="カメラ">
+          <button class="camera-button active" data-camera="wide" title="球場全景" aria-label="球場全景" aria-pressed="true"><i data-lucide="scan"></i></button>
+          <button class="camera-button" data-camera="home" title="ホームベース" aria-label="ホームベース" aria-pressed="false"><i data-lucide="focus"></i></button>
+          <button class="camera-button" data-camera="sky" title="上空カメラ" aria-label="上空カメラ" aria-pressed="false"><i data-lucide="orbit"></i></button>
+        </div>
+        <div id="sceneTitle" class="scene-title"><span id="sceneKicker">TONIGHT'S MAIN EVENT</span><h2 id="sceneHeading">運命の一球。</h2><p id="sceneSub">そのキャッチが、主役を決める。</p></div>
+        <div id="impact" class="impact" aria-hidden="true"><span>HOME</span><strong>RUN!</strong></div>
+        <section id="cutin" class="reaction-cutin" aria-label="被弾リアクション" hidden>
+          <div id="reactionPanels" class="reaction-panels">
+            <div class="reaction-panel reaction-pitcher"><div class="reaction-photo"><img id="cutinImage" src="/realize-stadium-lottery-v02/media/pitcher-shock.png" alt="打球に焦る投手" /></div><div class="reaction-voice"><span>PITCHER / 01</span><strong>打たれた！</strong></div></div>
+            <div class="reaction-panel reaction-catcher"><div class="reaction-photo"><img src="/realize-stadium-lottery-v02/media/duo-shock.png" alt="打球に焦る捕手" /></div><div class="reaction-voice"><span>CATCHER / 02</span><strong>そっち！？</strong></div></div>
+            <div class="reaction-panel reaction-fielder"><div class="reaction-photo"><img src="/realize-stadium-lottery-v02/media/duo-shock.png" alt="打球に焦る野手" /></div><div class="reaction-voice"><span>FIELDER / 03</span><strong>聞いてない！</strong></div></div>
+          </div>
+          <video id="cutinVideo" class="reaction-video" playsinline muted hidden></video>
+          <div class="reaction-meta"><span id="cutinTag">緊急カットイン</span><b>REALIZE TV</b></div>
+          <button id="cutinSkip" class="skip-button reaction-skip" aria-label="カットインを終了して結果へ" title="結果へ"><i data-lucide="skip-forward"></i><span>結果へ</span></button>
+          <div id="reactionHeadline" class="reaction-headline"><span id="cutinSpeaker">全員、想定外。</span><strong>打たれたーーー!!</strong><p id="cutinLine">「予定では、空振りでした。」</p></div>
+        </section>
+        <section id="reveal" class="reveal" aria-live="polite" hidden>
+          <p id="revealKicker">THE LUCKY CATCH</p><span id="revealCount" class="reveal-count"></span>
+          <h2 id="revealName"></h2><p id="revealCaption"></p><span class="reveal-rule"></span>
+        </section>
+        <div id="broadcast" class="broadcast" aria-live="polite"><span id="broadcastTag">STADIUM NEWS</span><div><strong id="broadcastText">今夜の主役は、まだ誰も知らない。</strong><span id="broadcastAside">REALIZE STADIUM / GRAND DRAW</span></div></div>
+        <footer class="transport">
+          <div class="round-stat"><span>ROUND</span><strong id="roundNumber">01<span> / 02</span></strong></div>
+          <button id="playBtn" class="play-button"><i data-lucide="play"></i><span id="playLabel">デモで開幕</span></button>
+          <button id="skipBtn" class="skip-button" aria-label="結果へ" title="結果へ" hidden><i data-lucide="skip-forward"></i><span>結果へ</span></button>
+          <div class="players-stat"><span>PLAYERS</span><strong id="playerNumber">00</strong></div>
+          <div id="timelineProgress" class="timeline-progress"></div>
+        </footer>
+      </main>
+      <aside id="operator" class="operator" aria-label="抽選操作卓">
+        <div class="operator-head"><div class="operator-top"><span class="eyebrow">CONTROL ROOM</span><button id="closePanel" class="small-icon" aria-label="操作卓を閉じる" title="操作卓を閉じる"><i data-lucide="x"></i></button></div><div><h2>抽選オペレーション</h2><span id="statusBadge" class="status-badge">準備中</span></div></div>
+        <div class="tabs" role="tablist" aria-label="操作画面">
+          <button id="rosterTab" role="tab" aria-selected="true" aria-controls="rosterPane"><i data-lucide="users"></i>メンバー</button>
+          <button id="showTab" role="tab" aria-selected="false" aria-controls="showPane" tabindex="-1"><i data-lucide="clapperboard"></i>演出</button>
+        </div>
+        <div class="operator-scroll">
+          <div id="rosterPane" role="tabpanel" aria-labelledby="rosterTab">
+            <div class="section-label"><label for="nameInput">出場メンバー</label><span id="rosterCount">0名</span></div>
+            <textarea id="nameInput" placeholder="名前を改行区切りで入力" spellcheck="false"></textarea>
+            <div class="roster-actions"><button id="registerBtn" class="button primary"><i data-lucide="check"></i>登録する</button><label class="button file-button" title="CSV・テキストから読み込み"><i data-lucide="upload"></i><input id="rosterFile" type="file" accept=".txt,.csv,text/plain,text/csv" aria-label="名簿ファイルを読み込む" /></label></div>
+            <p id="rosterMessage" class="field-message" role="status"></p>
+            <div class="setting-row"><label for="winnerLimit">当選人数</label><div class="stepper"><button id="lessWinners" aria-label="当選人数を減らす"><i data-lucide="minus"></i></button><input id="winnerLimit" type="number" min="1" max="20" value="2" aria-label="当選人数" /><button id="moreWinners" aria-label="当選人数を増やす"><i data-lucide="plus"></i></button></div></div>
+            <label class="switch-row"><span>この端末に保存</span><input id="saveLocal" type="checkbox" role="switch" /><span class="switch-track"></span></label>
+            <div class="section-label roster-list-label"><span>登録リスト</span><button id="demoBtn" class="text-button">デモ名簿</button></div>
+            <div id="rosterList" class="roster-list"><p class="empty-line">登録待ち</p></div>
+          </div>
+          <div id="showPane" role="tabpanel" aria-labelledby="showTab" hidden>
+            <div class="section-label"><label for="storySelect">演出シナリオ</label></div>
+            <select id="storySelect"><option value="auto">おまかせ</option><option value="moonshot">特大ホームラン</option><option value="slowball">超スローボール</option><option value="review">リプレイ審議</option></select>
+            <div class="section-label"><span>テンポ</span></div>
+            <div class="segmented" role="group" aria-label="演出の長さ"><button data-speed="1" aria-pressed="true" class="active">フル演出</button><button data-speed="2" aria-pressed="false">ショート</button></div>
+            <label class="switch-row"><span>カメラの動きを抑える</span><input id="reduceMotion" type="checkbox" role="switch" /><span class="switch-track"></span></label>
+            <div class="setting-row"><label for="quality">画質</label><select id="quality"><option value="high">高画質</option><option value="low">軽量</option></select></div>
+            <div class="section-label"><label for="volume">音量</label><output id="volumeValue">35%</output></div>
+            <input id="volume" type="range" min="0" max="100" value="35" />
+            <div class="section-label"><span>ビジョン映像</span></div>
+            <label class="video-upload"><i data-lucide="film"></i><span id="videoLabel">MP4 / WebM を選択</span><input id="videoFile" type="file" accept="video/mp4,video/webm" aria-label="ビジョン用の動画を選択" /></label>
+            <button id="removeVideo" class="text-button" hidden>映像を解除</button>
+            <p id="videoStatus" class="field-message" role="status"></p>
+          </div>
+          <section class="winners-section" aria-label="当選結果"><div class="section-label"><span>WINNERS</span><button id="exportBtn" class="small-icon" title="結果をCSVで保存" aria-label="結果をCSVで保存" disabled><i data-lucide="download"></i></button></div><ol id="winnerList" class="winner-list"><li class="empty-line">最初のキャッチを待っています</li></ol></section>
+        </div>
+        <div class="operator-footer"><button id="finalBtn" class="button" disabled><i data-lucide="trophy"></i>グランドフィナーレ</button><button id="resetBtn" class="small-icon" aria-label="新しい抽選を準備" title="新しい抽選を準備"><i data-lucide="rotate-ccw"></i></button></div>
+      </aside>
+    </div>
+    <dialog id="finalDialog" class="grand-finale" aria-labelledby="finalTitle">
+      <div class="finale-backdrop"><img src="/realize-stadium-lottery-v02/media/champions.png" alt="優勝を祝う3人の野球選手" /></div>
+      <div id="finalConfetti" class="finale-confetti" aria-hidden="true"></div>
+      <div id="finalComments" class="finale-comments" aria-hidden="true"></div>
+      <div class="finale-tools"><button id="finalMotionBtn" class="icon-button" aria-label="コメントと紙吹雪を止める" title="コメントと紙吹雪を止める" aria-pressed="false"><i data-lucide="pause" class="effect-pause"></i><i data-lucide="play" class="effect-play"></i></button><button id="closeFinal" class="icon-button" aria-label="結果画面を閉じる" title="結果画面を閉じる"><i data-lucide="x"></i></button></div>
+      <div class="finale-stage">
+        <header class="finale-title"><p>REALIZE STADIUM GRAND DRAW</p><h2 id="finalTitle">グランドフィナーレ</h2></header>
+        <div class="finale-results"><ol id="finalWinners" class="finale-winners"></ol><p class="finale-cheer">おめでとうございます！！</p><div class="finale-actions"><button id="finalReturn" class="button"><i data-lucide="arrow-left"></i>球場へ戻る</button><button id="finalExport" class="button"><i data-lucide="download"></i>結果を保存</button></div></div>
+      </div>
+    </dialog>
+    <dialog id="confirmDialog" class="confirm-dialog"><h2 id="confirmTitle">新しい抽選を準備しますか？</h2><p id="confirmText">現在の当選結果をクリアします。</p><div><button id="cancelConfirm" class="button">戻る</button><button id="acceptConfirm" class="button primary">準備する</button></div></dialog>
+    <div id="toast" class="toast" role="status" hidden></div>
+  </body>
+</html>
